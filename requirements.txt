@@ -1,1 +1,11 @@
 ollama-python
+wikipedia-api
+
+pandas==2.2.3
+numpy==1.26.4
+matplotlib==3.8.4
+torch==2.2.2
+scikit-learn==1.4.2
+pytest==8.4.0
+
+display_df
