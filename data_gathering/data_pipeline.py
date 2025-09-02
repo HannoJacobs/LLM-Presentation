@@ -2,11 +2,12 @@
 """
 Consolidated Data Pipeline for Animal Wikipedia Collection
 
-This single file efficiently creates all 3 dataset sizes from ONE scrape of 30 animals:
-- Scrapes all 30 animals once (respectful to Wikipedia)
-- Nano: 5 animals (subset of scraped data)
-- Mini: 10 animals (subset of scraped data)
-- Full: 30 animals (all scraped data)
+This single file automatically creates all 3 dataset sizes with 2 formats from your animal list:
+- Scrapes all animals once (respectful to Wikipedia)
+- Nano: First 5 animals from list
+- Mini: First 10 animals from list
+- Full: All animals from list
+- Formats: Basic and With Summary
 
 Just run: python3 data_pipeline.py
 """
@@ -222,7 +223,6 @@ class AnimalDataProcessor:
         formats = {
             "basic": f"Animal: {animal_data['animal_name']}\n\n{content}",
             "with_summary": f"Animal: {animal_data['animal_name']}\nSummary: {summary}\n\n{content}",
-            "qa_format": f"Question: Tell me about {animal_data['animal_name']}.\nAnswer: {content}",
         }
 
         return {
@@ -485,7 +485,7 @@ def run_data_pipeline():
     # Step 3: Create training files for all sizes and formats
     print("\n3️⃣ 📦 TRAINING DATA GENERATION")
 
-    formats = ["basic", "with_summary", "qa_format"]
+    formats = ["basic", "with_summary"]
 
     training_files = []
     for size, size_count in DATASET_CONFIG.items():
@@ -519,10 +519,10 @@ def run_data_pipeline():
     print("=" * 60)
     print(f"📦 Training files created: {len(training_files)}")
     print("📊 Dataset breakdown:")
-    print(f"   🧬 Nano: 3 files ({DATASET_CONFIG['nano']} animals)")
-    print(f"   📊 Mini: 3 files ({DATASET_CONFIG['mini']} animals)")
-    print(f"   🌍 Full: 3 files ({DATASET_CONFIG['full']} animals)")
-    print("📝 Formats: Basic, With Summary, Q&A")
+    print(f"   🧬 Nano: 2 files ({DATASET_CONFIG['nano']} animals)")
+    print(f"   📊 Mini: 2 files ({DATASET_CONFIG['mini']} animals)")
+    print(f"   🌍 Full: 2 files ({DATASET_CONFIG['full']} animals)")
+    print("📝 Formats: Basic, With Summary")
 
     if validation_success:
         print("✅ All validation checks passed!")
