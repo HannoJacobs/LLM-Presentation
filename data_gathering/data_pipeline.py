@@ -10,10 +10,10 @@ This single file contains all functionality for:
 - Validating output format and statistics
 
 Usage:
-    python3 data_pipeline.py --test    # Quick test with 5 animals
-    python3 data_pipeline.py           # Full collection (50 animals)
-    python3 data_pipeline.py --animals 25  # Custom count
-    python3 data_pipeline.py --demo    # Show usage demo
+    python3 data_pipeline.py --test          # Quick test (nano: 5 animals)
+    python3 data_pipeline.py --size mini     # Mini dataset (10 animals)
+    python3 data_pipeline.py --size full     # Full dataset (30 animals)
+    python3 data_pipeline.py --demo          # Show usage demo
 """
 
 import wikipediaapi
@@ -46,10 +46,10 @@ class AnimalWikiScraper:
         if not os.path.exists(self.datasets_dir):
             os.makedirs(self.datasets_dir)
 
-    def get_animal_list(self):
-        """Comprehensive list of animals to scrape"""
-        animals = [
-            # Mammals
+    def get_animal_list(self, size="full"):
+        """Curated list of 30 selected animals with size-based selection"""
+        # Hardcoded list of 30 diverse and interesting animals
+        all_animals = [
             "Cat",
             "Dog",
             "Elephant",
@@ -60,103 +60,38 @@ class AnimalWikiScraper:
             "Panda",
             "Koala",
             "Kangaroo",
-            "Platypus",
-            "Wombat",
-            "Sloth",
-            "Armadillo",
-            "Hedgehog",
-            "Fox",
-            "Wolf",
-            "Bear",
-            "Raccoon",
-            "Otter",
-            "Seal",
-            "Walrus",
-            "Dolphin",
-            "Whale",
-            "Shark",
-            "Octopus",
-            "Squid",
-            "Jellyfish",
-            "Starfish",
-            "Lobster",
-            # Birds
-            "Eagle",
-            "Owl",
-            "Penguin",
-            "Ostrich",
-            "Flamingo",
-            "Peacock",
-            "Parrot",
-            "Hummingbird",
-            "Woodpecker",
-            "Swan",
-            "Duck",
-            "Goose",
-            "Turkey",
-            "Chicken",
-            # Reptiles
-            "Crocodile",
-            "Alligator",
-            "Snake",
-            "Lizard",
-            "Turtle",
-            "Tortoise",
-            "Chameleon",
-            "Iguana",
-            "Gecko",
-            # Amphibians
-            "Frog",
-            "Toad",
-            "Salamander",
-            "Newt",
-            # Fish
-            "Goldfish",
-            "Tuna",
-            "Salmon",
-            "Clownfish",
-            "Piranha",
-            "Swordfish",
-            # Insects
-            "Butterfly",
-            "Bee",
-            "Ant",
-            "Spider",
-            "Scorpion",
-            "Dragonfly",
-            "Ladybug",
-            # Additional animals
             "Cheetah",
             "Leopard",
-            "Jaguar",
-            "Hyena",
-            "Meerkat",
-            "Lemur",
-            "Monkey",
             "Gorilla",
             "Chimpanzee",
             "Orangutan",
             "Rabbit",
-            "Hare",
-            "Squirrel",
-            "Mouse",
-            "Rat",
-            "Hamster",
-            "Guinea pig",
             "Horse",
             "Cow",
             "Sheep",
-            "Goat",
             "Pig",
             "Deer",
-            "Moose",
-            "Caribou",
-            "Buffalo",
-            "Camel",
-            "Llama",
-            "Alpaca",
+            "Bear",
+            "Wolf",
+            "Fox",
+            "Raccoon",
+            "Otter",
+            "Seal",
+            "Dolphin",
+            "Eagle",
+            "Owl",
         ]
-        return animals
+
+        # Validate we have exactly 30 animals
+        assert len(all_animals) == 30, f"Expected 30 animals, got {len(all_animals)}"
+
+        # Return subset based on size
+        if size == "nano":
+            return all_animals[:5]  # First 5 animals
+        elif size == "mini":
+            return all_animals[:10]  # First 10 animals
+        else:  # "full"
+            return all_animals  # All 30 animals
 
     def scrape_animal_page(self, animal_name):
         """Scrape a single animal's Wikipedia page"""
@@ -213,18 +148,19 @@ class AnimalWikiScraper:
         print(f"💾 Saved {len(valid_data)} animal articles to {filepath}")
         return filepath
 
-    def scrape_daily_animals(self, max_animals=None, delay_range=(1, 3)):
-        """Scrape a daily set of animal Wikipedia pages"""
-        animals = self.get_animal_list()
-
-        if max_animals:
-            # Randomly select animals to avoid always scraping the same ones
-            animals = random.sample(animals, min(max_animals, len(animals)))
+    def scrape_daily_animals(self, size="full", delay_range=(1, 3)):
+        """Scrape a set of animal Wikipedia pages based on dataset size"""
+        animals = self.get_animal_list(size=size)
 
         scraped_data = []
         successful = 0
 
-        print(f"🚀 Starting to scrape {len(animals)} animal pages...")
+        size_name = {
+            "nano": "Nano (5 animals)",
+            "mini": "Mini (10 animals)",
+            "full": "Full (30 animals)",
+        }[size]
+        print(f"🚀 Starting to scrape {size_name}...")
 
         for i, animal in enumerate(animals, 1):
             print(f"📄 Scraping {i}/{len(animals)}: {animal}")
@@ -288,7 +224,6 @@ class AnimalDataProcessor:
             "basic": f"Animal: {animal_data['animal_name']}\n\n{content}",
             "with_summary": f"Animal: {animal_data['animal_name']}\nSummary: {summary}\n\n{content}",
             "qa_format": f"Question: Tell me about {animal_data['animal_name']}.\nAnswer: {content}",
-            "instruction": f"Write an article about {animal_data['animal_name']}.\n\n{content}",
         }
 
         return {
@@ -514,7 +449,7 @@ class DataValidator:
         return all_valid
 
 
-def run_data_pipeline(max_animals=50):
+def run_data_pipeline(size="full"):
     """Run the complete data collection and processing pipeline"""
 
     print("=" * 60)
@@ -527,7 +462,7 @@ def run_data_pipeline(max_animals=50):
     print("\n1️⃣ 📊 SCRAPING PHASE")
     scraper = AnimalWikiScraper()
 
-    scraped_data, dataset_path = scraper.scrape_daily_animals(max_animals=max_animals)
+    scraped_data, dataset_path = scraper.scrape_daily_animals(size=size)
 
     if not scraped_data:
         print("❌ No data was scraped. Exiting.")
@@ -545,7 +480,7 @@ def run_data_pipeline(max_animals=50):
     # Step 3: Create training files in different formats and sizes
     print("\n3️⃣ 📦 TRAINING DATA GENERATION")
 
-    formats = ["basic", "with_summary", "qa_format", "instruction"]
+    formats = ["basic", "with_summary", "qa_format"]
     sizes = ["nano", "mini", "full"]
 
     training_files = []
@@ -577,8 +512,8 @@ def run_data_pipeline(max_animals=50):
     print(f"📁 Dataset saved: {dataset_path}")
     print(f"📁 Processed data: {processed_path}")
     print(f"📦 Training files created: {len(training_files)}")
-    print("📏 Dataset sizes: Nano (5), Mini (50%), Full (100%)")
-    print("📝 Training formats: Basic, With Summary, Q&A, Instruction")
+    print("📏 Dataset sizes: Nano (5 animals), Mini (10 animals), Full (30 animals)")
+    print("📝 Training formats: Basic, With Summary, Q&A")
     if validation_success:
         print("✅ All validation checks passed!")
         print("🎯 Ready for LLM training!")
@@ -691,13 +626,14 @@ def main():
         description="Animal Wikipedia Data Collection Pipeline"
     )
     parser.add_argument(
-        "--animals",
-        type=int,
-        default=50,
-        help="Maximum number of animals to scrape (default: 50)",
+        "--size",
+        type=str,
+        choices=["nano", "mini", "full"],
+        default="full",
+        help="Dataset size: nano (5 animals), mini (10 animals), full (30 animals) (default: full)",
     )
     parser.add_argument(
-        "--test", action="store_true", help="Run in test mode with 5 animals"
+        "--test", action="store_true", help="Run in test mode (nano size)"
     )
     parser.add_argument(
         "--demo",
@@ -714,11 +650,11 @@ def main():
 
     # Adjust for test mode
     if args.test:
-        args.animals = 5
-        print("🧪 Running in TEST MODE (5 animals)")
+        args.size = "nano"
+        print("🧪 Running in TEST MODE (nano size - 5 animals)")
 
     # Run the complete pipeline
-    success = run_data_pipeline(max_animals=args.animals)
+    success = run_data_pipeline(size=args.size)
 
     if success:
         print("\n🎉 Data collection pipeline completed successfully!")

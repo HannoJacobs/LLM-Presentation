@@ -30,9 +30,10 @@ pip install -r requirements.txt
 ### 2. Collect Training Data
 ```bash
 cd data_gathering
-python3 data_pipeline.py --test    # Quick test (5 animals)
-python3 data_pipeline.py           # Full collection (50 animals)
-python3 data_pipeline.py --demo    # View usage instructions
+python3 data_pipeline.py --test          # Quick test (nano: 5 animals)
+python3 data_pipeline.py --size mini     # Mini dataset (10 animals)
+python3 data_pipeline.py --size full     # Full dataset (30 animals)
+python3 data_pipeline.py --demo          # View usage instructions
 ```
 
 ### 4. Use in Training
@@ -57,16 +58,16 @@ The `src/` folder contains a complete decoder-only transformer implementation:
 
 The `data_gathering/data_pipeline.py` provides a complete automated pipeline:
 - **Single Script**: All-in-one scraping, processing, and validation
-- **3 Dataset Sizes**: Nano (5), Mini (50%), Full (100%)
-- **4 Training Formats**: Basic, With Summary, Q&A, Instruction
+- **3 Dataset Sizes**: Nano (5 animals), Mini (10 animals), Full (30 animals)
+- **3 Training Formats**: Basic, With Summary, Q&A
 - **Plain Text Output**: Ready for any LLM tokenizer
 - **Built-in Validation**: Automatic format verification
+- **Curated Animals**: Handpicked selection of 30 diverse animals
 
 ### Training Data Formats
 - **Basic**: `Animal: Cat\n\n[Article content]`
 - **With Summary**: Includes Wikipedia summary
 - **Q&A**: `Question: Tell me about Cat.\nAnswer: [Content]`
-- **Instruction**: `Write an article about Cat.\n\n[Content]`
 
 ## 🔧 Usage Examples
 
@@ -79,17 +80,19 @@ python3 infer_decoder_only.py
 ### Collect More Data
 ```bash
 cd data_gathering
-python3 data_pipeline.py --animals 25  # Custom animal count
+python3 data_pipeline.py --size mini     # Collect mini dataset (10 animals)
+python3 data_pipeline.py --size full     # Collect full dataset (30 animals)
 ```
 
 ## 📈 Training Data Statistics
 
 Recent collection:
-- **16 training files** created
-- **3 dataset sizes** (nano/mini/full)
-- **4 training formats** per size
-- **115K+ characters** per full dataset
+- **9 training files** created
+- **3 dataset sizes** (nano: 5, mini: 10, full: 30 animals)
+- **3 training formats** per size
+- **~100K+ characters** per full dataset
 - **Plain text format** ready for tokenization
+- **30 curated animals** (handpicked selection)
 
 ## 🎯 Project Goals
 

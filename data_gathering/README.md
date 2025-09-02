@@ -15,14 +15,14 @@ data_gathering/
 ### Run Complete Data Pipeline
 ```bash
 cd data_gathering
-python3 data_pipeline.py --test    # Test mode (5 animals)
-python3 data_pipeline.py           # Full collection (50 animals)
-python3 data_pipeline.py --animals 25  # Custom count
+python3 data_pipeline.py --test          # Test mode (nano: 5 animals)
+python3 data_pipeline.py --size mini     # Mini dataset (10 animals)
+python3 data_pipeline.py --size full     # Full dataset (30 animals)
 ```
 
 ### Show Usage Demo
 ```bash
-python3 data_pipeline.py --demo    # See how to use the generated data
+python3 data_pipeline.py --demo          # See how to use the generated data
 ```
 
 ## 📊 What the Pipeline Does
@@ -37,17 +37,16 @@ The single `data_pipeline.py` script handles everything:
 
 ## 🎯 Dataset Sizes Created
 
-- **🧬 Nano**: 5 animals (perfect for testing/debugging)
-- **📊 Mini**: 50% of animals (development/experiments)
-- **🌍 Full**: All animals (production training)
+- **🧬 Nano**: 5 animals (first 5 from curated list)
+- **📊 Mini**: 10 animals (first 10 from curated list)
+- **🌍 Full**: 30 animals (complete curated list)
 
 ## 📝 Training Formats
 
-Each dataset size includes 4 training formats:
+Each dataset size includes 3 training formats:
 - **Basic**: `Animal: Cat\n\n[Article content]`
 - **With Summary**: Includes Wikipedia summary
 - **Q&A**: `Question: Tell me about Cat.\nAnswer: [Content]`
-- **Instruction**: `Write an article about Cat.\n\n[Content]`
 
 ## 📂 Output Location
 
@@ -60,19 +59,19 @@ Training data is saved to:
 
 ## 🔧 Usage Examples
 
-### Quick Test
+### Quick Test (Nano)
 ```bash
 python3 data_pipeline.py --test
 ```
 
-### Full Collection
+### Mini Dataset (10 animals)
 ```bash
-python3 data_pipeline.py
+python3 data_pipeline.py --size mini
 ```
 
-### Custom Animal Count
+### Full Dataset (30 animals)
 ```bash
-python3 data_pipeline.py --animals 25
+python3 data_pipeline.py --size full
 ```
 
 ### View Usage Instructions
@@ -90,11 +89,11 @@ pip install wikipedia-api
 ## 📊 Expected Output
 
 Recent test run creates:
-- **16 training files** total
-- **4 files per format** (nano, mini, full, individual)
-- **4 formats** (basic, with_summary, qa_format, instruction)
+- **9 training files** total
+- **3 files per format** (nano, mini, full)
+- **3 formats** (basic, with_summary, qa_format)
 - **All in plain text** (.txt) format
-- **115K+ characters** per full dataset
+- **~100K+ characters** per full dataset (30 animals)
 
 ## 🎯 Use Cases
 
