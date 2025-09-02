@@ -1,7 +1,7 @@
 from ollama_python.endpoints import GenerateAPI
 
 model = "JetBrains/Mellum-4b-base"
-temperatures = [0.0, 0.3, 0.7, 1.0]
+temperatures = [0.0, 0.3, 0.7, 1.0, 1.3, 1.5, 2.0]
 
 prompt = """
 Question:
