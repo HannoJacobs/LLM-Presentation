@@ -15,25 +15,20 @@ data_gathering/
 ### Run Complete Data Pipeline
 ```bash
 cd data_gathering
-python3 data_pipeline.py --test          # Test mode (nano: 5 animals)
-python3 data_pipeline.py --size mini     # Mini dataset (10 animals)
-python3 data_pipeline.py --size full     # Full dataset (30 animals)
+python3 data_pipeline.py
 ```
 
-### Show Usage Demo
-```bash
-python3 data_pipeline.py --demo          # See how to use the generated data
-```
+That's it! The script automatically creates all 3 dataset sizes with no arguments needed.
 
 ## 📊 What the Pipeline Does
 
-The single `data_pipeline.py` script handles everything:
+The single `data_pipeline.py` script handles everything efficiently:
 
-1. **📊 Scraping**: Collects animal Wikipedia articles
+1. **📊 Single Scrape**: Collects all 30 animal Wikipedia articles once
 2. **🔄 Processing**: Cleans and formats text for LLM training
-3. **📦 Generation**: Creates multiple dataset sizes and formats
+3. **📦 Smart Generation**: Creates 3 dataset sizes from single scrape (no duplicates!)
 4. **🔍 Validation**: Verifies plain text format and statistics
-5. **📋 Demo**: Shows how to use the generated training data
+5. **📋 Results**: Ready-to-use training datasets
 
 ## 🎯 Dataset Sizes Created
 

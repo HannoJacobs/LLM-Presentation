@@ -2,18 +2,13 @@
 """
 Consolidated Data Pipeline for Animal Wikipedia Collection
 
-This single file contains all functionality for:
-- Scraping Wikipedia animal articles
-- Processing and formatting text for LLM training
-- Creating multiple dataset sizes (nano/mini/full)
-- Generating various training formats
-- Validating output format and statistics
+This single file efficiently creates all 3 dataset sizes from ONE scrape of 30 animals:
+- Scrapes all 30 animals once (respectful to Wikipedia)
+- Nano: 5 animals (subset of scraped data)
+- Mini: 10 animals (subset of scraped data)
+- Full: 30 animals (all scraped data)
 
-Usage:
-    python3 data_pipeline.py --test          # Quick test (nano: 5 animals)
-    python3 data_pipeline.py --size mini     # Mini dataset (10 animals)
-    python3 data_pipeline.py --size full     # Full dataset (30 animals)
-    python3 data_pipeline.py --demo          # Show usage demo
+Just run: python3 data_pipeline.py
 """
 
 import wikipediaapi
@@ -24,8 +19,47 @@ from datetime import datetime
 from pathlib import Path
 import time
 import random
-import argparse
 import sys
+
+ANIMAL_LIST = [
+    "Cat",
+    "Dog",
+    "Elephant",
+    "Lion",
+    "Tiger",
+    "Giraffe",
+    "Zebra",
+    "Panda",
+    "Koala",
+    "Kangaroo",
+    "Cheetah",
+    "Leopard",
+    "Gorilla",
+    # "Chimpanzee",
+    # "Orangutan",
+    # "Rabbit",
+    # "Horse",
+    # "Cow",
+    # "Sheep",
+    # "Pig",
+    # "Deer",
+    # "Bear",
+    # "Wolf",
+    # "Fox",
+    # "Raccoon",
+    # "Otter",
+    # "Seal",
+    # "Dolphin",
+    # "Eagle",
+    # "Owl",
+]
+
+# Dataset size configurations
+DATASET_CONFIG = {
+    "nano": 5,  # First 5 animals from list
+    "mini": 10,  # First 10 animals from list
+    "full": len(ANIMAL_LIST),  # All animals from list
+}
 
 
 class AnimalWikiScraper:
@@ -47,51 +81,16 @@ class AnimalWikiScraper:
             os.makedirs(self.datasets_dir)
 
     def get_animal_list(self, size="full"):
-        """Curated list of 30 selected animals with size-based selection"""
-        # Hardcoded list of 30 diverse and interesting animals
-        all_animals = [
-            "Cat",
-            "Dog",
-            "Elephant",
-            "Lion",
-            "Tiger",
-            "Giraffe",
-            "Zebra",
-            "Panda",
-            "Koala",
-            "Kangaroo",
-            "Cheetah",
-            "Leopard",
-            "Gorilla",
-            "Chimpanzee",
-            "Orangutan",
-            "Rabbit",
-            "Horse",
-            "Cow",
-            "Sheep",
-            "Pig",
-            "Deer",
-            "Bear",
-            "Wolf",
-            "Fox",
-            "Raccoon",
-            "Otter",
-            "Seal",
-            "Dolphin",
-            "Eagle",
-            "Owl",
-        ]
-
-        # Validate we have exactly 30 animals
-        assert len(all_animals) == 30, f"Expected 30 animals, got {len(all_animals)}"
-
+        """Get animal list from global configuration with size-based selection"""
         # Return subset based on size
         if size == "nano":
-            return all_animals[:5]  # First 5 animals
+            count = min(DATASET_CONFIG["nano"], len(ANIMAL_LIST))
+            return ANIMAL_LIST[:count]
         elif size == "mini":
-            return all_animals[:10]  # First 10 animals
+            count = min(DATASET_CONFIG["mini"], len(ANIMAL_LIST))
+            return ANIMAL_LIST[:count]
         else:  # "full"
-            return all_animals  # All 30 animals
+            return ANIMAL_LIST
 
     def scrape_animal_page(self, animal_name):
         """Scrape a single animal's Wikipedia page"""
@@ -156,9 +155,9 @@ class AnimalWikiScraper:
         successful = 0
 
         size_name = {
-            "nano": "Nano (5 animals)",
-            "mini": "Mini (10 animals)",
-            "full": "Full (30 animals)",
+            "nano": "Nano",
+            "mini": "Mini",
+            "full": "Full",
         }[size]
         print(f"🚀 Starting to scrape {size_name}...")
 
@@ -449,8 +448,8 @@ class DataValidator:
         return all_valid
 
 
-def run_data_pipeline(size="full"):
-    """Run the complete data collection and processing pipeline"""
+def run_data_pipeline():
+    """Run the complete data collection and processing pipeline for all 3 sizes"""
 
     print("=" * 60)
     print(
@@ -458,46 +457,55 @@ def run_data_pipeline(size="full"):
     )
     print("=" * 60)
 
-    # Step 1: Scrape animal data
+    # Step 1: Scrape all animals once
     print("\n1️⃣ 📊 SCRAPING PHASE")
-    scraper = AnimalWikiScraper()
+    print("🔄 Scraping all animals...")
 
-    scraped_data, dataset_path = scraper.scrape_daily_animals(size=size)
+    scraper = AnimalWikiScraper()
+    scraped_data, dataset_path = scraper.scrape_daily_animals(size="full")
 
     if not scraped_data:
-        print("❌ No data was scraped. Exiting.")
+        print("❌ Failed to scrape animals")
         return False
 
-    print(f"✅ Scraped {len(scraped_data)} animal articles")
+    print(f"✅ Successfully scraped {len(scraped_data)} animals")
+    print("📊 Creating dataset sizes from single scrape...")
 
     # Step 2: Process the data for LLM training
     print("\n2️⃣ 🔄 PROCESSING PHASE")
     processor = AnimalDataProcessor()
 
+    print("🔄 Processing complete dataset...")
     processed_path = processor.process_dataset_file(dataset_path)
-    print(f"✅ Processed data saved to: {processed_path}")
+    print(f"✅ Processed data: {os.path.basename(processed_path)}")
 
-    # Step 3: Create training files in different formats and sizes
+    # Create size-specific subsets from the processed data
+    print("📊 Creating size-specific datasets...")
+
+    # Step 3: Create training files for all sizes and formats
     print("\n3️⃣ 📦 TRAINING DATA GENERATION")
 
     formats = ["basic", "with_summary", "qa_format"]
-    sizes = ["nano", "mini", "full"]
 
     training_files = []
-    for format_type in formats:
-        print(f"\n📝 {format_type.upper()} format:")
+    for size, size_count in DATASET_CONFIG.items():
+        print(f"\n🔄 Creating {size.upper()} dataset ({size_count} animals)...")
 
-        # Create different sizes for this format
-        for size in sizes:
+        for format_type in formats:
             try:
                 combined_file = processor.create_combined_training_data(
                     format_type=format_type, size=size
                 )
                 if combined_file:
                     training_files.append(combined_file)
-                    print(f"    ✓ {size.upper()}: {os.path.basename(combined_file)}")
+                    print(f"    ✓ {format_type}: {os.path.basename(combined_file)}")
             except Exception as e:
-                print(f"    ✗ Failed {size} {format_type}: {e}")
+                print(f"    ✗ Failed {format_type} for {size}: {e}")
+
+        print(f"✅ {size.upper()} dataset complete")
+
+    print(f"✅ All training files generated: {len(training_files)} files")
+    print("💡 All created from single scrape - efficient and Wikipedia-friendly!")
 
     # Step 4: Validation
     print("\n4️⃣ 🔍 VALIDATION PHASE")
@@ -509,11 +517,13 @@ def run_data_pipeline(size="full"):
     print("=" * 60)
     print("✅ Pipeline completed successfully!")
     print("=" * 60)
-    print(f"📁 Dataset saved: {dataset_path}")
-    print(f"📁 Processed data: {processed_path}")
     print(f"📦 Training files created: {len(training_files)}")
-    print("📏 Dataset sizes: Nano (5 animals), Mini (10 animals), Full (30 animals)")
-    print("📝 Training formats: Basic, With Summary, Q&A")
+    print("📊 Dataset breakdown:")
+    print(f"   🧬 Nano: 3 files ({DATASET_CONFIG['nano']} animals)")
+    print(f"   📊 Mini: 3 files ({DATASET_CONFIG['mini']} animals)")
+    print(f"   🌍 Full: 3 files ({DATASET_CONFIG['full']} animals)")
+    print("📝 Formats: Basic, With Summary, Q&A")
+
     if validation_success:
         print("✅ All validation checks passed!")
         print("🎯 Ready for LLM training!")
@@ -523,145 +533,27 @@ def run_data_pipeline(size="full"):
     return True
 
 
-def show_usage_demo():
-    """Show how to use the generated training data"""
-
-    print("🔧 Plain Text Training Data Usage Demo")
-    print("=" * 50)
-
-    # Path to your training data
-    datasets_dir = "/Users/hannojacobs/Desktop/LLM-Presentation/Datasets"
-    processed_dir = os.path.join(datasets_dir, "processed")
-
-    # List available training files
-    if os.path.exists(processed_dir):
-        txt_files = [f for f in os.listdir(processed_dir) if f.endswith(".txt")]
-
-        # Group files by size
-        nano_files = [f for f in txt_files if "_nano_" in f]
-        mini_files = [f for f in txt_files if "_mini_" in f]
-        full_files = [
-            f
-            for f in txt_files
-            if "combined_" in f and "_nano_" not in f and "_mini_" not in f
-        ]
-        individual_files = [
-            f
-            for f in txt_files
-            if f not in nano_files and f not in mini_files and f not in full_files
-        ]
-
-        print(f"📂 Found {len(txt_files)} training data files:")
-        print(f"   🧬 Nano (5 animals): {len(nano_files)} files")
-        print(f"   📊 Mini (50% animals): {len(mini_files)} files")
-        print(f"   🌍 Full (all animals): {len(full_files)} files")
-        print(f"   📄 Individual files: {len(individual_files)} files")
-
-        print("\n📋 Available sizes:")
-        for size, files in [
-            ("Nano", nano_files),
-            ("Mini", mini_files),
-            ("Full", full_files),
-        ]:
-            if files:
-                print(f"   {size}: {files[0]}")
-
-    print("\n" + "=" * 50)
-    print("💡 How to use these files in your LLM training:")
-
-    print(
-        """
-1. CHOOSE YOUR DATASET SIZE:
-   ```python
-   # Nano (5 animals) - for quick testing
-   nano_file = 'Datasets/processed/combined_llm_training_data_basic_nano_2025-09-02.txt'
-
-   # Mini (50% of animals) - for development
-   mini_file = 'Datasets/processed/combined_llm_training_data_basic_mini_2025-09-02.txt'
-
-   # Full (all animals) - for production training
-   full_file = 'Datasets/processed/combined_llm_training_data_basic_full_2025-09-02.txt'
-   ```
-
-2. LOAD THE DATA:
-   ```python
-   with open(full_file, 'r', encoding='utf-8') as f:
-       training_text = f.read()
-   ```
-
-3. SPLIT INTO TRAINING SAMPLES:
-   ```python
-   # Split by article separators
-   articles = training_text.split('=' * 80)
-
-   # Each article becomes a training sample
-   training_samples = [article.strip() for article in articles if article.strip()]
-   ```
-
-4. TOKENIZE FOR YOUR MODEL:
-   ```python
-   # Use your tokenizer (example with transformers)
-   from transformers import AutoTokenizer
-
-   tokenizer = AutoTokenizer.from_pretrained('your-model-name')
-   tokenized_data = tokenizer(training_samples, truncation=True, padding=True)
-   ```
-
-5. FORMAT FOR TRAINING:
-   Each file contains plain text articles separated by:
-   ==================================================
-
-   Perfect for:
-   • Pre-training on factual knowledge
-   • Fine-tuning on specific domains
-   • Creating custom knowledge bases
-   """
-    )
-
-
 def main():
-    """Main function with command line interface"""
+    """Main function - automatically runs the complete data collection pipeline"""
 
-    parser = argparse.ArgumentParser(
-        description="Animal Wikipedia Data Collection Pipeline"
+    print("🚀 Starting automated data collection for all dataset sizes...")
+    print(
+        f"📊 Creating: Nano ({DATASET_CONFIG['nano']}), Mini ({DATASET_CONFIG['mini']}), Full ({DATASET_CONFIG['full']} animals)"
     )
-    parser.add_argument(
-        "--size",
-        type=str,
-        choices=["nano", "mini", "full"],
-        default="full",
-        help="Dataset size: nano (5 animals), mini (10 animals), full (30 animals) (default: full)",
-    )
-    parser.add_argument(
-        "--test", action="store_true", help="Run in test mode (nano size)"
-    )
-    parser.add_argument(
-        "--demo",
-        action="store_true",
-        help="Show usage demo instead of running pipeline",
-    )
+    print(f"📋 Using {len(ANIMAL_LIST)} animals from configured list")
 
-    args = parser.parse_args()
-
-    # Show demo if requested
-    if args.demo:
-        show_usage_demo()
-        return
-
-    # Adjust for test mode
-    if args.test:
-        args.size = "nano"
-        print("🧪 Running in TEST MODE (nano size - 5 animals)")
-
-    # Run the complete pipeline
-    success = run_data_pipeline(size=args.size)
+    # Run the complete pipeline (creates all sizes)
+    success = run_data_pipeline()
 
     if success:
-        print("\n🎉 Data collection pipeline completed successfully!")
+        print("\n🎉 Data collection completed successfully!")
         print("📍 Training data location: Datasets/processed/*.txt")
-        print("🔧 Use these plain text files directly in your LLM training!")
+        print(
+            f"📊 Created datasets: Nano ({DATASET_CONFIG['nano']}), Mini ({DATASET_CONFIG['mini']}), Full ({DATASET_CONFIG['full']} animals)"
+        )
+        print("🔧 Ready for LLM training!")
     else:
-        print("\n❌ Data collection pipeline failed!")
+        print("\n❌ Data collection failed!")
         sys.exit(1)
 
 

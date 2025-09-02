@@ -30,11 +30,10 @@ pip install -r requirements.txt
 ### 2. Collect Training Data
 ```bash
 cd data_gathering
-python3 data_pipeline.py --test          # Quick test (nano: 5 animals)
-python3 data_pipeline.py --size mini     # Mini dataset (10 animals)
-python3 data_pipeline.py --size full     # Full dataset (30 animals)
-python3 data_pipeline.py --demo          # View usage instructions
+python3 data_pipeline.py
 ```
+
+The script automatically creates all 3 dataset sizes (nano, mini, full) with no arguments needed.
 
 ### 4. Use in Training
 ```python
@@ -56,9 +55,10 @@ The `src/` folder contains a complete decoder-only transformer implementation:
 
 ## 📊 Data Collection
 
-The `data_gathering/data_pipeline.py` provides a complete automated pipeline:
+The `data_gathering/data_pipeline.py` provides an efficient automated pipeline:
 - **Single Script**: All-in-one scraping, processing, and validation
-- **3 Dataset Sizes**: Nano (5 animals), Mini (10 animals), Full (30 animals)
+- **Smart Scraping**: Scrapes all 30 animals once, creates subsets (Wikipedia-friendly!)
+- **3 Dataset Sizes**: Nano (5), Mini (10), Full (30 animals)
 - **3 Training Formats**: Basic, With Summary, Q&A
 - **Plain Text Output**: Ready for any LLM tokenizer
 - **Built-in Validation**: Automatic format verification
@@ -80,8 +80,7 @@ python3 infer_decoder_only.py
 ### Collect More Data
 ```bash
 cd data_gathering
-python3 data_pipeline.py --size mini     # Collect mini dataset (10 animals)
-python3 data_pipeline.py --size full     # Collect full dataset (30 animals)
+python3 data_pipeline.py  # Creates all 3 datasets automatically
 ```
 
 ## 📈 Training Data Statistics
