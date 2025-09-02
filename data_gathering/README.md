@@ -1,48 +1,53 @@
-# Data Gathering Scripts
+# Consolidated Data Pipeline
 
-This folder contains all the scripts for collecting, processing, and managing animal Wikipedia data for LLM training.
+This folder contains a single comprehensive script for collecting, processing, and managing animal Wikipedia data for LLM training.
 
 ## 📁 Folder Structure
 
 ```
 data_gathering/
-├── dataset_scraper.py      # Main Wikipedia scraping functionality
-├── data_processor.py       # Data processing and formatting for LLM training
-├── daily_scrape.py         # Automated daily data collection pipeline
-├── verify_text_format.py   # Verification script for plain text format
-├── training_data_demo.py   # Demo script showing how to use the data
-└── DATA_COLLECTION_README.md  # Detailed documentation
+├── data_pipeline.py        # 🔧 ALL-IN-ONE consolidated script
+└── README.md              # This documentation
 ```
 
 ## 🚀 Quick Start
 
-### Run Daily Data Collection
+### Run Complete Data Pipeline
 ```bash
 cd data_gathering
-python3 daily_scrape.py --test    # Test mode (5 animals)
-python3 daily_scrape.py           # Full collection (50 animals)
+python3 data_pipeline.py --test    # Test mode (5 animals)
+python3 data_pipeline.py           # Full collection (50 animals)
+python3 data_pipeline.py --animals 25  # Custom count
 ```
 
-### Verify Data Format
+### Show Usage Demo
 ```bash
-cd data_gathering
-python3 verify_text_format.py     # Check all training files
+python3 data_pipeline.py --demo    # See how to use the generated data
 ```
 
-### View Usage Demo
-```bash
-cd data_gathering
-python3 training_data_demo.py     # See how to use the data
-```
+## 📊 What the Pipeline Does
 
-## 📊 Dataset Sizes
+The single `data_pipeline.py` script handles everything:i
 
-The system creates 3 dataset sizes:
-- **Nano**: 5 animals (quick testing)
-- **Mini**: 50% of animals (development)
-- **Full**: All animals (production)
+1. **📊 Scraping**: Collects animal Wikipedia articles
+2. **🔄 Processing**: Cleans and formats text for LLM training
+3. **📦 Generation**: Creates multiple dataset sizes and formats
+4. **🔍 Validation**: Verifies plain text format and statistics
+5. **📋 Demo**: Shows how to use the generated training data
 
-Each size has 4 formats: Basic, With Summary, Q&A, Instruction.
+## 🎯 Dataset Sizes Created
+
+- **🧬 Nano**: 5 animals (perfect for testing/debugging)
+- **📊 Mini**: 50% of animals (development/experiments)
+- **🌍 Full**: All animals (production training)
+
+## 📝 Training Formats
+
+Each dataset size includes 4 training formats:
+- **Basic**: `Animal: Cat\n\n[Article content]`
+- **With Summary**: Includes Wikipedia summary
+- **Q&A**: `Question: Tell me about Cat.\nAnswer: [Content]`
+- **Instruction**: `Write an article about Cat.\n\n[Content]`
 
 ## 📂 Output Location
 
@@ -51,22 +56,28 @@ Training data is saved to:
 /Datasets/processed/*.txt
 ```
 
-All files are in **plain text format** ready for LLM training.
+**All files are in pure plain text format** ready for LLM training!
 
-## 🔧 Individual Scripts
+## 🔧 Usage Examples
 
-### dataset_scraper.py
-```python
-from dataset_scraper import AnimalWikiScraper
-scraper = AnimalWikiScraper()
-scraper.scrape_daily_animals(max_animals=10)
+### Quick Test
+```bash
+python3 data_pipeline.py --test
 ```
 
-### data_processor.py
-```python
-from data_processor import AnimalDataProcessor
-processor = AnimalDataProcessor()
-processor.process_all_datasets()
+### Full Collection
+```bash
+python3 data_pipeline.py
+```
+
+### Custom Animal Count
+```bash
+python3 data_pipeline.py --animals 25
+```
+
+### View Usage Instructions
+```bash
+python3 data_pipeline.py --demo
 ```
 
 ## 📋 Requirements
@@ -76,25 +87,39 @@ Make sure you have the required dependencies:
 pip install wikipedia-api
 ```
 
-## 📖 Documentation
+## 📊 Expected Output
 
-See `DATA_COLLECTION_README.md` for comprehensive documentation including:
-- Detailed usage examples
-- Data format specifications
-- Integration with LLM training pipelines
-- Troubleshooting guide
+Recent test run creates:
+- **16 training files** total
+- **4 files per format** (nano, mini, full, individual)
+- **4 formats** (basic, with_summary, qa_format, instruction)
+- **All in plain text** (.txt) format
+- **115K+ characters** per full dataset
 
 ## 🎯 Use Cases
 
-- **Research**: Academic studies on LLM training data
-- **Development**: Testing and prototyping
-- **Production**: Building animal knowledge bases
-- **Education**: Teaching data collection and processing
+- **🧪 Testing**: Nano datasets for quick validation
+- **🔬 Research**: Mini datasets for experiments
+- **🏭 Production**: Full datasets for model training
+- **📚 Education**: Complete pipeline for learning
 
 ## 🔄 Automation
 
-Set up cron jobs for automated daily data collection:
+Set up cron jobs for automated data collection:
 ```bash
 # Example: Run daily at 2 AM
-0 2 * * * cd /path/to/data_gathering && python3 daily_scrape.py
+0 2 * * * cd /path/to/data_gathering && python3 data_pipeline.py
 ```
+
+## 📖 Script Documentation
+
+The `data_pipeline.py` file contains:
+
+- `AnimalWikiScraper` class: Handles Wikipedia scraping
+- `AnimalDataProcessor` class: Processes and formats data
+- `DataValidator` class: Validates output format
+- `run_data_pipeline()`: Main pipeline execution
+- `show_usage_demo()`: Usage instructions
+- `__main__`: Command-line interface
+
+All functionality is consolidated into one maintainable file!

@@ -11,14 +11,9 @@ LLM-Presentation/
 │   ├── mha.py                   # Multi-head attention implementation
 │   ├── ollama_run.py            # Ollama integration
 │   └── infer_decoder_only.py    # Inference utilities
-├── data_gathering/              # Data collection and processing scripts
-│   ├── dataset_scraper.py       # Wikipedia scraping functionality
-│   ├── data_processor.py        # Data processing and formatting
-│   ├── daily_scrape.py          # Automated daily data collection
-│   ├── verify_text_format.py    # Data verification scripts
-│   ├── training_data_demo.py    # Usage demonstrations
-│   ├── README.md               # Data gathering documentation
-│   └── DATA_COLLECTION_README.md # Comprehensive data collection docs
+├── data_gathering/              # Data collection and processing
+│   ├── data_pipeline.py        # 🔧 ALL-IN-ONE consolidated script
+│   └── README.md               # Data gathering documentation
 ├── Datasets/                    # Generated training data
 │   └── processed/              # Processed training files (.txt)
 ├── requirements.txt             # Python dependencies
@@ -35,14 +30,9 @@ pip install -r requirements.txt
 ### 2. Collect Training Data
 ```bash
 cd data_gathering
-python3 daily_scrape.py --test    # Quick test (5 animals)
-python3 daily_scrape.py           # Full collection (50 animals)
-```
-
-### 3. Verify Data
-```bash
-cd data_gathering
-python3 verify_text_format.py     # Check data format
+python3 data_pipeline.py --test    # Quick test (5 animals)
+python3 data_pipeline.py           # Full collection (50 animals)
+python3 data_pipeline.py --demo    # View usage instructions
 ```
 
 ### 4. Use in Training
@@ -65,17 +55,18 @@ The `src/` folder contains a complete decoder-only transformer implementation:
 
 ## 📊 Data Collection
 
-The `data_gathering/` folder provides automated Wikipedia data collection:
+The `data_gathering/data_pipeline.py` provides a complete automated pipeline:
+- **Single Script**: All-in-one scraping, processing, and validation
 - **3 Dataset Sizes**: Nano (5), Mini (50%), Full (100%)
 - **4 Training Formats**: Basic, With Summary, Q&A, Instruction
 - **Plain Text Output**: Ready for any LLM tokenizer
-- **Daily Automation**: Cron job ready for continuous data collection
+- **Built-in Validation**: Automatic format verification
 
 ### Training Data Formats
-- **Basic**: "Animal: Cat\n\n[Article content]"
+- **Basic**: `Animal: Cat\n\n[Article content]`
 - **With Summary**: Includes Wikipedia summary
-- **Q&A**: "Question: Tell me about Cat.\nAnswer: [Content]"
-- **Instruction**: "Write an article about Cat.\n\n[Content]"
+- **Q&A**: `Question: Tell me about Cat.\nAnswer: [Content]`
+- **Instruction**: `Write an article about Cat.\n\n[Content]`
 
 ## 🔧 Usage Examples
 
@@ -88,13 +79,7 @@ python3 infer_decoder_only.py
 ### Collect More Data
 ```bash
 cd data_gathering
-python3 daily_scrape.py --animals 25  # Custom animal count
-```
-
-### Process Existing Data
-```bash
-cd data_gathering
-python3 data_processor.py
+python3 data_pipeline.py --animals 25  # Custom animal count
 ```
 
 ## 📈 Training Data Statistics
