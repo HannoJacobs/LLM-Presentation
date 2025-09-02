@@ -2,12 +2,13 @@
 """
 Consolidated Data Pipeline for Animal Wikipedia Collection
 
-This single file automatically creates all 3 dataset sizes with 2 formats from your animal list:
+This single file automatically creates 3 dataset sizes with direct article content from your animal list:
 - Scrapes all animals once (respectful to Wikipedia)
+- Truncates each article to first 1000 words
 - Nano: First 5 animals from list
 - Mini: First 10 animals from list
 - Full: All animals from list
-- Formats: Basic and With Summary
+- Content: Direct article text only
 
 Just run: python3 data_pipeline.py
 """
@@ -29,30 +30,30 @@ ANIMAL_LIST = [
     "Lion",
     "Tiger",
     "Giraffe",
-    "Zebra",
-    "Panda",
-    "Koala",
-    "Kangaroo",
-    "Cheetah",
-    "Leopard",
-    "Gorilla",
-    "Chimpanzee",
-    "Orangutan",
-    "Rabbit",
-    "Horse",
-    "Cow",
-    "Sheep",
-    "Pig",
-    "Deer",
-    "Bear",
-    "Wolf",
-    "Fox",
-    "Raccoon",
-    "Otter",
-    "Seal",
-    "Dolphin",
-    "Eagle",
-    "Owl",
+    # "Zebra",
+    # "Panda",
+    # "Koala",
+    # "Kangaroo",
+    # "Cheetah",
+    # "Leopard",
+    # "Gorilla",
+    # "Chimpanzee",
+    # "Orangutan",
+    # "Rabbit",
+    # "Horse",
+    # "Cow",
+    # "Sheep",
+    # "Pig",
+    # "Deer",
+    # "Bear",
+    # "Wolf",
+    # "Fox",
+    # "Raccoon",
+    # "Otter",
+    # "Seal",
+    # "Dolphin",
+    # "Eagle",
+    # "Owl",
 ]
 
 # Dataset size configurations
@@ -61,6 +62,8 @@ DATASET_CONFIG = {
     "mini": 10,  # First 10 animals from list
     "full": len(ANIMAL_LIST),  # All animals from list
 }
+
+os.makedirs("Datasets", exist_ok=True)
 
 
 class AnimalWikiScraper:
@@ -212,29 +215,27 @@ class AnimalDataProcessor:
         text = re.sub(r"==.*?==", "", text)  # Remove section headers
         text = re.sub(r"^\s*$", "", text, flags=re.MULTILINE)  # Remove empty lines
 
+        # Truncate to first 1000 words
+        words = text.split()
+        if len(words) > 1000:
+            text = " ".join(words[:1000])
+
         return text.strip()
 
     def process_animal_data(self, animal_data):
         """Process a single animal's data for training"""
         content = self.clean_text(animal_data["content"])
-        summary = self.clean_text(animal_data["summary"])
-
-        # Create different training formats
-        formats = {
-            "basic": f"Animal: {animal_data['animal_name']}\n\n{content}",
-            "with_summary": f"Animal: {animal_data['animal_name']}\nSummary: {summary}\n\n{content}",
-        }
 
         return {
             "animal_name": animal_data["animal_name"],
             "title": animal_data["title"],
             "url": animal_data["url"],
+            "content": content,
             "content_length": len(content),
             "scraped_at": animal_data["scraped_at"],
-            "training_formats": formats,
         }
 
-    def create_combined_training_data(self, format_type="basic", size="full"):
+    def create_combined_training_data(self, size="full"):
         """Create a combined training file from all processed datasets with different sizes"""
         processed_files = list(
             self.processed_dir.glob("processed_animal_dataset_*.json")
@@ -252,7 +253,9 @@ class AnimalDataProcessor:
                 dataset = json.load(f)
 
             for animal in dataset["animals"]:
-                all_training_texts.append(animal["training_formats"][format_type])
+                # Format: Animal name followed by content
+                formatted_content = f"{animal['animal_name']}\n\n{animal['content']}"
+                all_training_texts.append(formatted_content)
                 total_animals += 1
 
         # Apply size filtering
@@ -269,14 +272,14 @@ class AnimalDataProcessor:
 
         # Save combined training file
         size_suffix = f"_{size}" if size != "full" else ""
-        combined_filename = f"combined_llm_training_data_{format_type}{size_suffix}_{datetime.now().strftime('%Y-%m-%d')}.txt"
+        combined_filename = f"combined_llm_training_data{size_suffix}_{datetime.now().strftime('%Y-%m-%d')}.txt"
         combined_path = self.processed_dir / combined_filename
 
         with open(combined_path, "w", encoding="utf-8") as f:
             for i, text in enumerate(all_training_texts):
                 f.write(text)
                 if i < len(all_training_texts) - 1:
-                    f.write("\n\n" + "=" * 80 + "\n\n")
+                    f.write("\n\n\n")
 
         size_name = {
             "nano": "Nano (5 animals)",
@@ -482,25 +485,20 @@ def run_data_pipeline():
     # Create size-specific subsets from the processed data
     print("📊 Creating size-specific datasets...")
 
-    # Step 3: Create training files for all sizes and formats
+    # Step 3: Create training files for all sizes
     print("\n3️⃣ 📦 TRAINING DATA GENERATION")
-
-    formats = ["basic", "with_summary"]
 
     training_files = []
     for size, size_count in DATASET_CONFIG.items():
         print(f"\n🔄 Creating {size.upper()} dataset ({size_count} animals)...")
 
-        for format_type in formats:
-            try:
-                combined_file = processor.create_combined_training_data(
-                    format_type=format_type, size=size
-                )
-                if combined_file:
-                    training_files.append(combined_file)
-                    print(f"    ✓ {format_type}: {os.path.basename(combined_file)}")
-            except Exception as e:
-                print(f"    ✗ Failed {format_type} for {size}: {e}")
+        try:
+            combined_file = processor.create_combined_training_data(size=size)
+            if combined_file:
+                training_files.append(combined_file)
+                print(f"    ✓ Article content: {os.path.basename(combined_file)}")
+        except Exception as e:
+            print(f"    ✗ Failed for {size}: {e}")
 
         print(f"✅ {size.upper()} dataset complete")
 
@@ -519,10 +517,10 @@ def run_data_pipeline():
     print("=" * 60)
     print(f"📦 Training files created: {len(training_files)}")
     print("📊 Dataset breakdown:")
-    print(f"   🧬 Nano: 2 files ({DATASET_CONFIG['nano']} animals)")
-    print(f"   📊 Mini: 2 files ({DATASET_CONFIG['mini']} animals)")
-    print(f"   🌍 Full: 2 files ({DATASET_CONFIG['full']} animals)")
-    print("📝 Formats: Basic, With Summary")
+    print(f"   🧬 Nano: 1 file ({DATASET_CONFIG['nano']} animals)")
+    print(f"   📊 Mini: 1 file ({DATASET_CONFIG['mini']} animals)")
+    print(f"   🌍 Full: 1 file ({DATASET_CONFIG['full']} animals)")
+    print("📝 Content: Direct article text (1000 words max)")
 
     if validation_success:
         print("✅ All validation checks passed!")
