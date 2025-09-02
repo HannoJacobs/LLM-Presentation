@@ -27,7 +27,7 @@ python3 data_pipeline.py --demo    # See how to use the generated data
 
 ## 📊 What the Pipeline Does
 
-The single `data_pipeline.py` script handles everything:i
+The single `data_pipeline.py` script handles everything:
 
 1. **📊 Scraping**: Collects animal Wikipedia articles
 2. **🔄 Processing**: Cleans and formats text for LLM training
