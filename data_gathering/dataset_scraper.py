@@ -10,6 +10,7 @@ class AnimalWikiScraper:
     def __init__(
         self, datasets_dir="/Users/hannojacobs/Desktop/LLM-Presentation/Datasets"
     ):
+        # Note: datasets_dir path is absolute and doesn't need to change
         self.wiki = wikipediaapi.Wikipedia(
             user_agent="AnimalDatasetScraper/1.0 (Educational LLM Training Project)",
             language="en",
