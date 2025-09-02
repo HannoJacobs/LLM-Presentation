@@ -30,30 +30,30 @@ ANIMAL_LIST = [
     "Lion",
     "Tiger",
     "Giraffe",
-    # "Zebra",
-    # "Panda",
-    # "Koala",
-    # "Kangaroo",
-    # "Cheetah",
-    # "Leopard",
-    # "Gorilla",
-    # "Chimpanzee",
-    # "Orangutan",
-    # "Rabbit",
-    # "Horse",
-    # "Cow",
-    # "Sheep",
-    # "Pig",
-    # "Deer",
-    # "Bear",
-    # "Wolf",
-    # "Fox",
-    # "Raccoon",
-    # "Otter",
-    # "Seal",
-    # "Dolphin",
-    # "Eagle",
-    # "Owl",
+    "Zebra",
+    "Panda",
+    "Koala",
+    "Kangaroo",
+    "Cheetah",
+    "Leopard",
+    "Gorilla",
+    "Chimpanzee",
+    "Orangutan",
+    "Rabbit",
+    "Horse",
+    "Cow",
+    "Sheep",
+    "Pig",
+    "Deer",
+    "Bear",
+    "Wolf",
+    "Fox",
+    "Raccoon",
+    "Otter",
+    "Seal",
+    "Dolphin",
+    "Eagle",
+    "Owl",
 ]
 
 # Dataset size configurations
@@ -271,8 +271,8 @@ class AnimalDataProcessor:
         # "full" uses all animals (default)
 
         # Save combined training file
-        size_suffix = f"_{size}" if size != "full" else ""
-        combined_filename = f"combined_llm_training_data{size_suffix}_{datetime.now().strftime('%Y-%m-%d')}.txt"
+        size_suffix = f"_{size}"
+        combined_filename = f"animal_data{size_suffix}.txt"
         combined_path = self.processed_dir / combined_filename
 
         with open(combined_path, "w", encoding="utf-8") as f:

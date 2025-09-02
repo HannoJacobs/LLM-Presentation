@@ -17,10 +17,11 @@ from torch.utils.data import Dataset, DataLoader, random_split
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.mha import MHA  # pylint: disable=C0413
 
-FILE_NAME = "0_nano"
-# FILE_NAME = "1_mini"
-# FILE_NAME = "2_full"
-DATA_PATH = f"Datasets/tiny_shakespeare_{FILE_NAME}.txt"
+# FILE_NAME = "nano"
+# FILE_NAME = "mini"
+FILE_NAME = "full"
+DATA_PATH = f"Datasets/processed/animal_data_{FILE_NAME}.txt"
+
 
 BATCH_SIZE = 64
 EPOCHS = 10
@@ -605,7 +606,7 @@ if __name__ == "__main__":
     print(f"\nTotal runtime: {minutes}m {seconds}s")
 
     # ---- 7. Demo ----
-    DEMO = "We are accounted poor citizens, the patricians good."
+    DEMO = "The cat (Felis catus), also referred to as the domestic cat or house cat"
     print("\nPROMPT:", DEMO)
     print(
         "GENERATED:",

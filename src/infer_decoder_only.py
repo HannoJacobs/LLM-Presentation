@@ -8,11 +8,11 @@ from src.decoder_only import *
 
 MODEL_PATH = "models/decoder_only_latest.pth"
 INFER_TEXTS = [
-    "We are accounted poor citizens, the patricians good.",
-    "Would you proceed especially against",
-    "Against him first: he's a very",
-    "Consider you what services",
-    "Very well; and could be content to",
+    "The cat (Felis catus), also referred to as the domestic cat or house cat,",
+    "The dog (Canis familiaris or Canis lupus familiaris) is a ",
+    "Elephants are the largest living land animals. ",
+    "The lion (Panthera leo) is a large cat of the genus Panthera,",
+    "The tiger (Panthera tigris) is a large cat and a member of ",
 ]
 
 # Temperature settings with paired top_k values for combined effects demo
