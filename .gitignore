@@ -235,6 +235,7 @@ models/*
 
 # ignore large datasets
 Datasets/*
+!Datasets/processed/
 !Datasets/processed/animal_data_full.txt
 !Datasets/processed/animal_data_mini.txt
 !Datasets/processed/animal_data_nano.txt
