@@ -6,13 +6,15 @@ import torch
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.decoder_only import *
 
-MODEL_PATH = "models/decoder_only_latest.pth"
+# MODEL_PATH = "models/decoder_only_latest.pth"
+MODEL_PATH = "models/decoder_only_qa_finetuned_larger_latest.pth"
 INFER_TEXTS = [
     "The cat (Felis catus), also referred to as the domestic cat or house cat,",
     "The dog (Canis familiaris or Canis lupus familiaris) is a ",
     "Elephants are the largest living land animals. ",
     "The lion (Panthera leo) is a large cat of the genus Panthera,",
     "The tiger (Panthera tigris) is a large cat and a member of ",
+    "Question: What is the scientific name of the cat",
 ]
 
 # Temperature settings with paired top_k values for combined effects demo

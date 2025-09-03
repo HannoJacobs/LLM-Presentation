@@ -49,7 +49,7 @@ BATCH_SIZE = 16  # smaller batch for longer sequences
 SEQ_LEN = 128  # max total length (BOS + question + answer + EOS)
 LEARNING_RATE = 5e-5
 VAL_SPLIT = 0.1
-SAVE_PREFIX = "models/decoder_only_qa_finetuned_small"
+SAVE_PREFIX = "models/decoder_only_qa_finetuned_larger"
 
 
 class QADataset(Dataset):
