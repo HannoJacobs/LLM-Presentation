@@ -24,7 +24,7 @@ DATA_PATH = f"Datasets/processed/animal_data_{FILE_NAME}.txt"
 
 
 BATCH_SIZE = 64
-EPOCHS = 50
+EPOCHS = 10
 LEARNING_RATE = 3e-4
 D_MODEL = 1024
 NHEAD = 8
