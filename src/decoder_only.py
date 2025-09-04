@@ -17,19 +17,19 @@ from torch.utils.data import Dataset, DataLoader, random_split
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.mha import MHA  # pylint: disable=C0413
 
-# FILE_NAME = "nano"
+FILE_NAME = "nano"
 # FILE_NAME = "mini"
-FILE_NAME = "full"
+# FILE_NAME = "full"
 DATA_PATH = f"Datasets/processed/animal_data_{FILE_NAME}.txt"
 
 
 BATCH_SIZE = 64
 EPOCHS = 10
 LEARNING_RATE = 3e-4
-D_MODEL = 1024
-NHEAD = 8
+D_MODEL = 512
+NHEAD = 4
 NUM_LAYERS = 4
-DIM_FEEDFORWARD = 2048
+DIM_FEEDFORWARD = 512
 DROPOUT = 0.1
 INPUT_MAX_SEQ_LEN = 10
 OUTPUT_MAX_SEQ_LEN = 10

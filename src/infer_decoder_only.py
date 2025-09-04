@@ -6,24 +6,46 @@ import torch
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.decoder_only import *
 
-# MODEL_PATH = "models/decoder_only_latest.pth"
-MODEL_PATH = "models/decoder_only_qa_finetuned_larger_latest.pth"
-INFER_TEXTS = [
-    # "The cat (Felis catus), also referred to as the domestic cat or house cat,",
-    # "The dog (Canis familiaris or Canis lupus familiaris) is a ",
-    # "Elephants are the largest living land animals. ",
-    # "The lion (Panthera leo) is a large cat of the genus Panthera,",
-    # "The tiger (Panthera tigris) is a large cat and a member of ",
-    "Question: What is the scientific name of the cat? Answer: ",
-]
+BASE_MODEL = False
 
-# Temperature settings with paired top_k values for combined effects demo
-TEMP_CONFIGS = [
-    (0.0, 1, "❄️"),  # Deterministic + top_1 (only best token)
-    (0.5, 5, "🌤️"),  # Low creativity + small top_k
-    (1.0, 20, "🌡️"),  # Balanced + medium top_k
-    (2.0, 50, "🔥"),  # High creativity + large top_k
-]
+if BASE_MODEL:
+    #### BASE MODEL ####
+    #### BASE MODEL ####
+    #### BASE MODEL ####
+    MODEL_PATH = "models/base_full_10_1024_8_4_2048.pth"
+    INFER_TEXTS = [
+        "The cat (Felis catus), also referred to as the domestic cat or house cat,",
+        "The dog (Canis familiaris or Canis lupus familiaris) is a ",
+        "Elephants are the largest living land animals. ",
+        "The lion (Panthera leo) is a large cat of the genus Panthera,",
+        "The tiger (Panthera tigris) is a large cat and a member of ",
+    ]
+    TEMP_CONFIGS = [
+        (0.5, 5, ""),  # Low creativity + small top_k
+        # (0.0, 1, "❄️"),  # Deterministic + top_1 (only best token)
+        # (0.5, 5, "🌤️"),  # Low creativity + small top_k
+        # (1.0, 20, "🌡️"),  # Balanced + medium top_k
+        # (2.0, 50, "🔥"),  # High creativity + large top_k
+    ]
+else:
+    #### FINETUNED MODEL ####
+    #### FINETUNED MODEL ####
+    #### FINETUNED MODEL ####
+    MODEL_PATH = "models/finetune_full_10_1024_8_4_2048_latest.pth"
+    INFER_TEXTS = [
+        "Question: What is the scientific name of the cat?\nAnswer: ",
+        "Question: When did the domestication of cats occur?\nAnswer: ",
+        "Question: What is the estimated global dog population?\nAnswer: ",
+        "Question: What is the largest living land animal?\nAnswer: ",
+        "Question: How many living elephant species are currently recognised?\nAnswer: ",
+    ]
+    TEMP_CONFIGS = [
+        (0.5, 5, ""),  # Low creativity + small top_k
+        # (0.0, 1, "❄️"),  # Deterministic + top_1 (only best token)
+        # (0.5, 5, "🌤️"),  # Low creativity + small top_k
+        # (1.0, 20, "🌡️"),  # Balanced + medium top_k
+        # (2.0, 50, "🔥"),  # High creativity + large top_k
+    ]
 
 
 def load_model(ckpt_path: str):

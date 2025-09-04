@@ -38,18 +38,17 @@ from src.decoder_only import (  # pylint: disable=C0413
 )
 
 
-# =====================
-# Global Configuration
-# =====================
-# Edit these variables to configure fine-tuning without CLI args
-BASE_MODEL_PATH = "models/decoder_only_latest.pth"
+# BASE_MODEL_PATH = "models/base_full_10_1024_8_4_2048.pth"
+# SAVE_PREFIX = "models/finetune_full_10_1024_8_4_2048"
+BASE_MODEL_PATH = "models/base_nano_10_512_4_4_512.pth"
+SAVE_PREFIX = "models/finetune_nano_10_512_4_4_512"
+
 DATASET_PATH = "Datasets/finetune_qa.txt"
 EPOCHS = 5
 BATCH_SIZE = 16  # smaller batch for longer sequences
 SEQ_LEN = 128  # max total length (BOS + question + answer + EOS)
-LEARNING_RATE = 5e-5
+LEARNING_RATE = 1e-3
 VAL_SPLIT = 0.1
-SAVE_PREFIX = "models/decoder_only_qa_finetuned_larger"
 
 
 class QADataset(Dataset):
