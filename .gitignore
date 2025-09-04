@@ -239,3 +239,4 @@ Datasets/*
 !Datasets/processed/animal_data_full.txt
 !Datasets/processed/animal_data_mini.txt
 !Datasets/processed/animal_data_nano.txt
+!Datasets/finetune_qa.txt

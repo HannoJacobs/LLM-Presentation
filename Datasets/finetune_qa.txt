@@ -1,0 +1,140 @@
+Question: What is the scientific name for the domestic cat?
+Answer: The scientific name for the domestic cat is Felis catus.
+
+Question: When did the domestication of cats occur?
+Answer: The domestication of cats occurred in the Near East around 7500 BC.
+
+Question: What is the estimated global dog population?
+Answer: The global dog population is estimated at 700 million to 1 billion.
+
+Question: What is the largest living land animal?
+Answer: Elephants are the largest living land animals.
+
+Question: How many living elephant species are currently recognised?
+Answer: Three living species are currently recognised: the African bush elephant, the African forest elephant, and the Asian elephant.
+
+Question: What is the scientific name for the lion?
+Answer: The scientific name for the lion is Panthera leo.
+
+Question: What color is tiger fur and what markings does it have?
+Answer: Tiger fur is orange with black, mostly vertical stripes.
+
+Question: Where are lions native to?
+Answer: Lions are native to Sub-Saharan Africa and India.
+
+Question: What is the average litter size for domestic cats?
+Answer: Litter sizes for domestic cats often range from two to five kittens.
+
+Question: What are the main threats to tiger populations?
+Answer: Major threats to tigers are habitat destruction and fragmentation due to deforestation, poaching for fur and the illegal trade of body parts for medicinal purposes.
+
+Question: What are the distinctive features of elephants?
+Answer: Distinctive features of elephants include a long proboscis called a trunk, tusks, large ear flaps, pillar-like legs, and tough but sensitive grey skin.
+
+Question: What is the dog's sense of smell compared to humans?
+Answer: Compared to humans, dogs possess a superior sense of smell and hearing, but inferior visual acuity.
+
+Question: What roles do dogs perform for humans?
+Answer: Dogs perform many roles for humans, such as hunting, herding, pulling loads, protection, companionship, therapy, aiding disabled people, and assisting police and the military.
+
+Question: How do elephants communicate?
+Answer: Elephants communicate by touch, sight, smell, and sound; elephants use infrasound and seismic communication over long distances.
+
+Question: What is the conservation status of African forest elephants?
+Answer: African forest elephants are listed as critically endangered on the IUCN Red List.
+
+Question: What is a lion's pride?
+Answer: A lion's pride consists of a few adult males, related females, and cubs.
+
+Question: What type of predator is the lion?
+Answer: The lion is an apex and keystone predator.
+
+Question: What is the tiger's habitat?
+Answer: Throughout the tiger's range, it inhabits mainly forests, from coniferous and temperate broadleaf and mixed forests to tropical and subtropical moist broadleaf forests.
+
+Question: What is the origin of the English word "cat"?
+Answer: The origin of the English word cat is thought to be the Late Latin word cattus, which was first used at the beginning of the 6th century.
+
+Question: What is the scientific name for the dog?
+Answer: The scientific name for the dog is Canis familiaris or Canis lupus familiaris.
+
+Question: What is the global population of domestic cats?
+Answer: The estimated global cat population is 600 million cats worldwide.
+
+Question: What are elephant tusks used for?
+Answer: Tusks, which are derived from the incisor teeth, serve both as weapons and as tools for moving objects and digging.
+
+Question: What is musth in elephants?
+Answer: Adult bulls enter a state of increased testosterone and aggression known as musth, which helps them gain dominance over other males as well as reproductive success.
+
+Question: What is the difference between African and Asian elephant ears?
+Answer: African elephants have larger ears and concave backs, whereas Asian elephants have smaller ears and convex or level backs.
+
+Question: What is the dog's relationship with humans called?
+Answer: The human–canine bond has been a topic of frequent study, and dogs' influence on human society has given them the sobriquet of "man's best friend".
+
+Question: What is the tiger's primary prey?
+Answer: The tiger is an apex predator and preys mainly on ungulates, which it takes by ambush.
+
+Question: How do cats hear compared to humans?
+Answer: Cats can hear sounds too faint or too high in frequency for human ears, such as those made by small mammals.
+
+Question: What is the lifespan of elephants in the wild?
+Answer: Elephants can live up to 70 years in the wild.
+
+Question: What is the scientific name given to the tiger by Carl Linnaeus?
+Answer: In 1758, Carl Linnaeus described the tiger in his work Systema Naturae and gave it the scientific name Felis tigris.
+
+Question: What is the tallest living terrestrial animal?
+Answer: The giraffe is the tallest living terrestrial animal.
+
+Question: How many species of giraffe are currently recognized?
+Answer: Four extant species of giraffe are currently recognized based on molecular studies.
+
+Question: What do zebras use their stripes for?
+Answer: Zebra stripes come in different patterns, unique to each individual, and several theories suggest they act as a deterrent for biting flies.
+
+Question: What is the primary diet of giant pandas?
+Answer: The giant panda's diet consists almost entirely of bamboo and bamboo shoots.
+
+Question: How long do giant pandas sleep?
+Answer: Giant pandas can sleep up to twenty hours a day.
+
+Question: What is the kangaroo's specialized teeth used for?
+Answer: Kangaroos have specialized teeth that are rare among mammals; their incisors crop grass close to the ground and molars chop and grind the grass.
+
+Question: What is the fastest land animal?
+Answer: The cheetah is the fastest land animal.
+
+Question: What is the scientific name for the cheetah?
+Answer: The scientific name for the cheetah is Acinonyx jubatus.
+
+Question: What is the largest living primate?
+Answer: Gorillas are the largest living primates, reaching heights between 1.25 and 1.8 m and weights between 100 and 270 kg.
+
+Question: What is the chimpanzee's gestation period?
+Answer: The chimpanzee's gestation period is eight months.
+
+Question: What is the orangutan's primary food source?
+Answer: Fruit is the most important component of an orangutan's diet.
+
+Question: What is the rabbit's typical sleep pattern?
+Answer: Rabbits are typically nocturnal and often sleep with their eyes open.
+
+Question: When were horses first domesticated?
+Answer: Humans began domesticating horses around 4000 BCE in Central Asia.
+
+Question: What is the average lifespan of a domestic horse?
+Answer: The average lifespan of a domestic horse is between 25 and 30 years.
+
+Question: What is the global population of domestic cattle?
+Answer: There are over 940 million cattle in the world.
+
+Question: What is the most widely used animal fiber?
+Answer: Sheep's wool is the most widely used animal fiber.
+
+Question: What is the largest producer of pork worldwide?
+Answer: China is the world's largest pork producer.
+
+Question: What is the primary cause of extinction of bird, mammal, and reptile species related to cats?
+Answer: Pet abandonment has exploded the global feral cat population, which has driven the extinction of bird, mammal, and reptile species.
