@@ -1,29 +1,29 @@
 Question: What is the scientific name for the domestic cat?
-Answer: The scientific name for the domestic cat is (Felis catus).
+Answer: The scientific name Felis catus was proposed by Carl Linnaeus in 1758 for a domestic cat.
 
 Question: When did the domestication of cats occur?
-Answer: The domestication of cats occurred in the Near East around 7500 BC.
+Answer: Advances in archaeology and genetics have shown that the domestication of the cat occurred in the Near East around 7500 BC.
 
 Question: What is the estimated global dog population?
-Answer: The global dog population is estimated at 700 million to 1 billion.
+Answer: The global dog population is estimated at 700 million to 1 billion, distributed around the world.
 
 Question: What is the largest living land animal?
 Answer: Elephants are the largest living land animals.
 
 Question: How many living elephant species are currently recognised?
-Answer: Three living species are currently recognised: the African bush elephant, the African forest elephant, and the Asian elephant.
+Answer: Three living species are currently recognised: the African bush elephant (Loxodonta africana), the African forest elephant (L. cyclotis), and the Asian elephant (Elephas maximus).
 
 Question: What is the scientific name for the lion?
-Answer: The scientific name for the lion is Panthera leo.
+Answer: The lion (Panthera leo) is a large cat of the genus Panthera, native to Sub-Saharan Africa and India.
 
 Question: What color is tiger fur and what markings does it have?
-Answer: Tiger fur is orange with black, mostly vertical stripes.
+Answer: It has a powerful, muscular body with a large head and paws, a long tail and orange fur with black, mostly vertical stripes.
 
 Question: Where are lions native to?
 Answer: Lions are native to Sub-Saharan Africa and India.
 
 Question: What is the average litter size for domestic cats?
-Answer: Litter sizes for domestic cats often range from two to five kittens.
+Answer: Female domestic cats can have kittens from spring to late autumn in temperate zones and throughout the year in equatorial regions, with litter sizes often ranging from two to five kittens.
 
 Question: What are the main threats to tiger populations?
 Answer: Major threats to tigers are habitat destruction and fragmentation due to deforestation, poaching for fur and the illegal trade of body parts for medicinal purposes.
@@ -41,31 +41,31 @@ Question: How do elephants communicate?
 Answer: Elephants communicate by touch, sight, smell, and sound; elephants use infrasound and seismic communication over long distances.
 
 Question: What is the conservation status of African forest elephants?
-Answer: African forest elephants are listed as critically endangered on the IUCN Red List.
+Answer: African bush elephants and Asian elephants are listed as endangered and African forest elephants as critically endangered on the IUCN Red Lists.
 
 Question: What is a lion's pride?
-Answer: A lion's pride consists of a few adult males, related females, and cubs.
+Answer: It is a social species, forming groups called prides. A lion's pride consists of a few adult males, related females, and cubs.
 
 Question: What type of predator is the lion?
 Answer: The lion is an apex and keystone predator.
 
 Question: What is the tiger's habitat?
-Answer: Throughout the tiger's range, it inhabits mainly forests, from coniferous and temperate broadleaf and mixed forests to tropical and subtropical moist broadleaf forests.
+Answer: Throughout the tiger's range, it inhabits mainly forests, from coniferous and temperate broadleaf and mixed forests in the Russian Far East and Northeast China to tropical and subtropical moist broadleaf forests on the Indian subcontinent and Southeast Asia.
 
 Question: What is the origin of the English word "cat"?
-Answer: The origin of the English word cat is thought to be the Late Latin word cattus, which was first used at the beginning of the 6th century.
+Answer: The origin of the English word cat, Old English catt, is thought to be the Late Latin word cattus, which was first used at the beginning of the 6th century.
 
 Question: What is the scientific name for the dog?
-Answer: The scientific name for the dog is Canis familiaris or Canis lupus familiaris.
+Answer: The dog (Canis familiaris or Canis lupus familiaris) is a domesticated descendant of the gray wolf.
 
 Question: What is the global population of domestic cats?
-Answer: The estimated global cat population is 600 million cats worldwide.
+Answer: Out of the estimated 600 million cats worldwide, 400 million reside in Asia, including 58 million pet cats in China.
 
 Question: What are elephant tusks used for?
 Answer: Tusks, which are derived from the incisor teeth, serve both as weapons and as tools for moving objects and digging.
 
 Question: What is musth in elephants?
-Answer: Adult bulls enter a state of increased testosterone and aggression known as musth, which helps them gain dominance over other males as well as reproductive success.
+Answer: Adult bulls mostly interact with family groups when looking for a mate. They enter a state of increased testosterone and aggression known as musth, which helps them gain dominance over other males as well as reproductive success.
 
 Question: What is the difference between African and Asian elephant ears?
 Answer: African elephants have larger ears and concave backs, whereas Asian elephants have smaller ears and convex or level backs.
@@ -77,64 +77,13 @@ Question: What is the tiger's primary prey?
 Answer: The tiger is an apex predator and preys mainly on ungulates, which it takes by ambush.
 
 Question: How do cats hear compared to humans?
-Answer: Cats can hear sounds too faint or too high in frequency for human ears, such as those made by small mammals.
+Answer: It can hear sounds too faint or too high in frequency for human ears, such as those made by small mammals.
 
 Question: What is the lifespan of elephants in the wild?
 Answer: Elephants can live up to 70 years in the wild.
 
 Question: What is the scientific name given to the tiger by Carl Linnaeus?
 Answer: In 1758, Carl Linnaeus described the tiger in his work Systema Naturae and gave it the scientific name Felis tigris.
-
-Question: What is the tallest living terrestrial animal?
-Answer: The giraffe is the tallest living terrestrial animal.
-
-Question: How many species of giraffe are currently recognized?
-Answer: Four extant species of giraffe are currently recognized based on molecular studies.
-
-Question: What do zebras use their stripes for?
-Answer: Zebra stripes come in different patterns, unique to each individual, and several theories suggest they act as a deterrent for biting flies.
-
-Question: What is the primary diet of giant pandas?
-Answer: The giant panda's diet consists almost entirely of bamboo and bamboo shoots.
-
-Question: How long do giant pandas sleep?
-Answer: Giant pandas can sleep up to twenty hours a day.
-
-Question: What is the kangaroo's specialized teeth used for?
-Answer: Kangaroos have specialized teeth that are rare among mammals; their incisors crop grass close to the ground and molars chop and grind the grass.
-
-Question: What is the fastest land animal?
-Answer: The cheetah is the fastest land animal.
-
-Question: What is the scientific name for the cheetah?
-Answer: The scientific name for the cheetah is Acinonyx jubatus.
-
-Question: What is the largest living primate?
-Answer: Gorillas are the largest living primates, reaching heights between 1.25 and 1.8 m and weights between 100 and 270 kg.
-
-Question: What is the chimpanzee's gestation period?
-Answer: The chimpanzee's gestation period is eight months.
-
-Question: What is the orangutan's primary food source?
-Answer: Fruit is the most important component of an orangutan's diet.
-
-Question: What is the rabbit's typical sleep pattern?
-Answer: Rabbits are typically nocturnal and often sleep with their eyes open.
-
-Question: When were horses first domesticated?
-Answer: Humans began domesticating horses around 4000 BCE in Central Asia.
-
-Question: What is the average lifespan of a domestic horse?
-Answer: The average lifespan of a domestic horse is between 25 and 30 years.
-
-Question: What is the global population of domestic cattle?
-Answer: There are over 940 million cattle in the world.
-
-Question: What is the most widely used animal fiber?
-Answer: Sheep's wool is the most widely used animal fiber.
-
-Question: What is the largest producer of pork worldwide?
-Answer: China is the world's largest pork producer.
 
 Question: What is the primary cause of extinction of bird, mammal, and reptile species related to cats?
 Answer: Pet abandonment has exploded the global feral cat population, which has driven the extinction of bird, mammal, and reptile species.
