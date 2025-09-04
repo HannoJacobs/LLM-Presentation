@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../"
 from src.decoder_only import *
 
 BASE_MODEL = False
+DEMO_TEMP = False
 
 if BASE_MODEL:
     #### BASE MODEL ####
@@ -35,11 +36,11 @@ else:
     # MODEL_PATH = "models/finetune_full_10_1024_8_4_2048_latest.pth"
     MODEL_PATH = "models/finetune_nano_10_512_4_4_512_latest.pth"
     INFER_TEXTS = [
-        "Question: What is the scientific name of the cat?\nAnswer: ",
-        "Question: When did the domestication of cats occur?\nAnswer: ",
+        "Question: Where are lions native to?\nAnswer: ",
+        "Question: What are the main threats to tiger populations?\nAnswer: ",
         "Question: What is the estimated global dog population?\nAnswer: ",
-        "Question: What is the largest living land animal?\nAnswer: ",
-        "Question: How many living elephant species are currently recognised?\nAnswer: ",
+        "Question: What are the distinctive features of elephants?\nAnswer: ",
+        "Question: What roles do dogs perform for humans?\nAnswer: ",
     ]
     TEMP_CONFIGS = [
         (0.5, 5, ""),  # Low creativity + small top_k
@@ -63,17 +64,24 @@ def load_model(ckpt_path: str):
 
 model, vocab, inv_vocab = load_model(MODEL_PATH)
 
-print("\nTemperature + Top-K Effects Demo")
-print("=" * 40)
+if DEMO_TEMP:
+    print("\nTemperature + Top-K Effects Demo")
+    print("=" * 40)
 
 for text in INFER_TEXTS:
-    print(f"\nPrompt: {text}")
-    print("-" * 30)
+    print_txt = text[10:-9]
+    print(f"\nPrompt: {print_txt}")
+
+    if DEMO_TEMP:
+        print("-" * 30)
 
     for temp, top_k, emoji in TEMP_CONFIGS:
         generated = infer(
             model, text, vocab, inv_vocab, max_len=20, temperature=temp, top_k=top_k
         )
-        print(f"{emoji} {temp:.1f}(k={top_k}): {generated}")
+        if DEMO_TEMP:
+            print(f"{emoji} {temp:.1f}(k={top_k}): {generated}")
+        else:
+            print(f"LLM response: {generated}")
 
     print()
