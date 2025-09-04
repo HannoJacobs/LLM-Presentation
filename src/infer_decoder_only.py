@@ -13,27 +13,18 @@ if BASE_MODEL:
     #### BASE MODEL ####
     #### BASE MODEL ####
     #### BASE MODEL ####
-    # MODEL_PATH = "models/base_full_10_1024_8_4_2048.pth"
     MODEL_PATH = "models/base_nano_10_512_4_4_512.pth"
     INFER_TEXTS = [
         "The cat (Felis catus), also referred to as the domestic cat or house cat,",
         "The dog (Canis familiaris or Canis lupus familiaris) is a ",
         "Elephants are the largest living land animals. ",
         "The lion (Panthera leo) is a large cat of the genus Panthera,",
-        "The tiger (Panthera tigris) is a large cat and a member of ",
-    ]
-    TEMP_CONFIGS = [
-        (0.5, 5, ""),  # Low creativity + small top_k
-        # (0.0, 1, "❄️"),  # Deterministic + top_1 (only best token)
-        # (0.5, 5, "🌤️"),  # Low creativity + small top_k
-        # (1.0, 20, "🌡️"),  # Balanced + medium top_k
-        # (2.0, 50, "🔥"),  # High creativity + large top_k
+        "The tiger (Panthera tigris) is a large cat and a member",
     ]
 else:
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
-    # MODEL_PATH = "models/finetune_full_10_1024_8_4_2048_latest.pth"
     MODEL_PATH = "models/finetune_nano_10_512_4_4_512_latest.pth"
     INFER_TEXTS = [
         "Question: Where are lions native to?\nAnswer: ",
@@ -42,12 +33,17 @@ else:
         "Question: What are the distinctive features of elephants?\nAnswer: ",
         "Question: What roles do dogs perform for humans?\nAnswer: ",
     ]
+
+if DEMO_TEMP:
+    TEMP_CONFIGS = [
+        (0.0, 1, "❄️"),  # Deterministic + top_1 (only best token)
+        (0.5, 5, "🌤️"),  # Low creativity + small top_k
+        (1.0, 20, "🌡️"),  # Balanced + medium top_k
+        (2.0, 50, "🔥"),  # High creativity + large top_k
+    ]
+else:
     TEMP_CONFIGS = [
         (0.5, 5, ""),  # Low creativity + small top_k
-        # (0.0, 1, "❄️"),  # Deterministic + top_1 (only best token)
-        # (0.5, 5, "🌤️"),  # Low creativity + small top_k
-        # (1.0, 20, "🌡️"),  # Balanced + medium top_k
-        # (2.0, 50, "🔥"),  # High creativity + large top_k
     ]
 
 
@@ -69,7 +65,9 @@ if DEMO_TEMP:
     print("=" * 40)
 
 for text in INFER_TEXTS:
-    print_txt = text[10:-9]
+    print_txt = text
+    if not BASE_MODEL:
+        print_txt = text[10:-9]
     print(f"\nPrompt: {print_txt}")
 
     if DEMO_TEMP:
