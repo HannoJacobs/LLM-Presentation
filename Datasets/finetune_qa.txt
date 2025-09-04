@@ -1,5 +1,5 @@
 Question: What is the scientific name for the domestic cat?
-Answer: The scientific name for the domestic cat is Felis catus.
+Answer: The scientific name for the domestic cat is (Felis catus).
 
 Question: When did the domestication of cats occur?
 Answer: The domestication of cats occurred in the Near East around 7500 BC.

@@ -12,7 +12,8 @@ if BASE_MODEL:
     #### BASE MODEL ####
     #### BASE MODEL ####
     #### BASE MODEL ####
-    MODEL_PATH = "models/base_full_10_1024_8_4_2048.pth"
+    # MODEL_PATH = "models/base_full_10_1024_8_4_2048.pth"
+    MODEL_PATH = "models/base_nano_10_512_4_4_512.pth"
     INFER_TEXTS = [
         "The cat (Felis catus), also referred to as the domestic cat or house cat,",
         "The dog (Canis familiaris or Canis lupus familiaris) is a ",
@@ -31,7 +32,8 @@ else:
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
-    MODEL_PATH = "models/finetune_full_10_1024_8_4_2048_latest.pth"
+    # MODEL_PATH = "models/finetune_full_10_1024_8_4_2048_latest.pth"
+    MODEL_PATH = "models/finetune_nano_10_512_4_4_512_latest.pth"
     INFER_TEXTS = [
         "Question: What is the scientific name of the cat?\nAnswer: ",
         "Question: When did the domestication of cats occur?\nAnswer: ",
