@@ -17,9 +17,9 @@ from torch.utils.data import Dataset, DataLoader, random_split
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.mha import MHA  # pylint: disable=C0413
 
-# FILE_NAME = "nano"
+FILE_NAME = "nano"
 # FILE_NAME = "mini"
-FILE_NAME = "full"
+# FILE_NAME = "full"
 DATA_PATH = f"Datasets/processed/animal_data_{FILE_NAME}.txt"
 
 
