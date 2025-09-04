@@ -240,3 +240,7 @@ Datasets/*
 !Datasets/processed/animal_data_mini.txt
 !Datasets/processed/animal_data_nano.txt
 !Datasets/finetune_qa.txt
+
+# demo models
+!models/base_nano_10_512_4_4_512.pth
+!models/finetune_nano_10_512_4_4_512.pth

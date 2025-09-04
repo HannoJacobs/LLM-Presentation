@@ -25,7 +25,7 @@ else:
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
-    MODEL_PATH = "models/finetune_nano_10_512_4_4_512_latest.pth"
+    MODEL_PATH = "models/finetune_nano_10_512_4_4_512.pth"
     INFER_TEXTS = [
         "Question: Where are lions native to?\nAnswer: ",
         "Question: What are the main threats to tiger populations?\nAnswer: ",
