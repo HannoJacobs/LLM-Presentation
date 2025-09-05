@@ -1,5 +1,7 @@
-ollama-python
-wikipedia-api
+ollama-python==0.1.2
+wikipedia-api==0.8.1
+bertviz==1.4.1
+transformers==4.56.1
 
 pandas==2.2.3
 numpy==1.26.4
