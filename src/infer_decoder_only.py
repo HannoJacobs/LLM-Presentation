@@ -6,7 +6,7 @@ import torch
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 from src.decoder_only import *
 
-BASE_MODEL = False
+BASE_MODEL = True
 DEMO_TEMP = False
 
 if BASE_MODEL:
@@ -25,7 +25,8 @@ else:
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
     #### FINETUNED MODEL ####
-    MODEL_PATH = "models/finetune_nano_10_512_4_4_512.pth"
+    # MODEL_PATH = "models/finetune_nano_10_512_4_4_512.pth"
+    MODEL_PATH = "models/finetune_nano_10_512_4_4_512_temp_demo.pth"
     INFER_TEXTS = [
         "Question: Where are lions native to?\nAnswer: ",
         "Question: What are the main threats to tiger populations?\nAnswer: ",
@@ -59,10 +60,6 @@ def load_model(ckpt_path: str):
 
 
 model, vocab, inv_vocab = load_model(MODEL_PATH)
-
-if DEMO_TEMP:
-    print("\nTemperature + Top-K Effects Demo")
-    print("=" * 40)
 
 for text in INFER_TEXTS:
     print_txt = text

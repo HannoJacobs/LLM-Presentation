@@ -44,7 +44,8 @@ BASE_MODEL_PATH = "models/base_nano_10_512_4_4_512.pth"
 SAVE_PREFIX = "models/finetune_nano_10_512_4_4_512"
 
 DATASET_PATH = "Datasets/finetune_qa.txt"
-EPOCHS = 10000
+# EPOCHS = 10000
+EPOCHS = 100
 BATCH_SIZE = 16  # smaller batch for longer sequences
 SEQ_LEN = 128  # max total length (BOS + question + answer + EOS)
 LEARNING_RATE = 1e-3

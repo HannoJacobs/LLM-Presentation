@@ -244,3 +244,4 @@ Datasets/*
 # demo models
 !models/base_nano_10_512_4_4_512.pth
 !models/finetune_nano_10_512_4_4_512.pth
+!models/finetune_nano_10_512_4_4_512_temp_demo.pth
