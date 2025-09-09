@@ -38,9 +38,9 @@ else:
 if DEMO_TEMP:
     TEMP_CONFIGS = [
         (0.0, 1, "❄️"),  # Deterministic + top_1 (only best token)
-        (0.5, 5, "🌤️"),  # Low creativity + small top_k
-        (1.0, 20, "🌡️"),  # Balanced + medium top_k
-        (2.0, 50, "🔥"),  # High creativity + large top_k
+        (0.5, 5, "🌤️"),  # Low creativity
+        (1.0, 20, "🌡️"),  # Balanced
+        (2.0, 50, "🔥"),  # High creativity
     ]
 else:
     TEMP_CONFIGS = [
