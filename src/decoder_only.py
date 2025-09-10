@@ -1,4 +1,59 @@
-"""Autoregressive Decoder-Only Transformer Model"""
+"""
+Decoder-Only Transformer Language Model Implementation
+
+This module implements a complete decoder-only transformer architecture for language modeling,
+featuring training, inference, and evaluation capabilities. The model is designed to generate
+coherent text by predicting the next token in a sequence based on previous context.
+
+Key Features:
+- Complete GPT-style decoder-only transformer architecture
+- Custom word-level tokenization with special tokens (<bos>, <eos>, <pad>, <unk>)
+- Positional encoding for sequence position awareness
+- Multi-head self-attention mechanism
+- Feed-forward networks with residual connections
+- Training pipeline with validation and checkpointing
+- Text generation with temperature sampling and top-k filtering
+- Dataset handling for text corpora
+
+Architecture Components:
+- PositionalEncoding: Adds position information to token embeddings
+- CustomDecoderLayer: Single transformer decoder layer with MHA and FFN
+- TransformerModel: Complete decoder-only transformer stack
+- TextDataset: PyTorch Dataset for text data with sliding window sequences
+
+Training Features:
+- Adam optimizer with configurable learning rate
+- Cross-entropy loss with padding token masking
+- Gradient clipping for stability
+- Progress tracking with loss/perplexity metrics
+- Model checkpointing with timestamped saves
+
+Inference Features:
+- Autoregressive text generation
+- Temperature-controlled randomness (0.0 = deterministic, higher = more creative)
+- Top-k sampling for quality control
+- Configurable maximum generation length
+- Attention mask handling for proper causal masking
+
+Usage:
+    # Training
+    source .venv/bin/activate && python3 src/decoder_only.py
+
+    # Inference (see infer_decoder_only.py)
+    model = TransformerModel(vocab)
+    generated_text = infer(model, "The cat sat on", vocab, inv_vocab)
+
+Configuration:
+    Model size can be adjusted via constants at the top of the file:
+    - NANO: 4 layers, 512 dim (fast training, good for demos)
+    - MINI: 6 layers, 768 dim (balanced performance)
+    - FULL: 12 layers, 1024 dim (best performance, slower training)
+
+Dependencies:
+    - torch: Deep learning framework
+    - matplotlib: Training visualization
+    - src.mha: Custom multi-head attention implementation
+"""
 
 # pylint: disable=C3001,R0914,R0913,R0917
 import os

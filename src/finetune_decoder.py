@@ -1,10 +1,72 @@
-"""Fine-tune the decoder-only model on an instruction dataset.
+"""
+Fine-tuning Script for Decoder-Only Transformer Models
 
-This script:
-- Loads a pre-trained checkpoint from models/decoder_only_latest.pth (by default)
-- Builds a dataset from instruct_dataset.txt using the saved vocab
-- Fine-tunes the model
-- Saves a timestamped and a *_latest.pth checkpoint for the finetuned model
+This script fine-tunes a pre-trained decoder-only transformer model on question-answer pairs
+to optimize it for conversational and instructional tasks. The fine-tuning process adapts a
+general language model to perform better on specific Q&A tasks while preserving its general
+language understanding capabilities.
+
+Key Features:
+- Load pre-trained base model checkpoints for transfer learning
+- Custom Q&A dataset class with proper sequence formatting
+- Masked loss computation to ignore prompt tokens during training
+- Gradient-based optimization with configurable hyperparameters
+- Validation monitoring and early stopping capabilities
+- Model checkpointing with timestamped and latest versions
+- Progress tracking with training/validation metrics
+
+Fine-tuning Process:
+1. Load pre-trained base model and vocabulary
+2. Parse Q&A dataset into proper training format
+3. Create training/validation splits
+4. Fine-tune model with masked language modeling objective
+5. Save optimized model for inference
+
+Dataset Format:
+- Input: Question-Answer pairs from Datasets/finetune_qa.txt
+- Format: "Question: [question]\nAnswer: [answer]"
+- Processing: Convert to sequences with BOS/EOS tokens
+- Masking: Ignore loss on question tokens during training
+
+Architecture:
+- QADataset: Custom dataset class for Q&A fine-tuning
+- Sequence Format: [BOS] + [Question tokens] + [Answer tokens] + [EOS]
+- Loss Masking: Only compute loss on answer tokens
+- Position Handling: Proper handling of variable-length sequences
+
+Training Configuration:
+- Base model loading from configurable checkpoint path
+- Adam optimizer with adjustable learning rate
+- Cross-entropy loss with padding token masking
+- Configurable batch size and sequence length
+- Training/validation split for performance monitoring
+
+Usage:
+    # Fine-tune base model on Q&A dataset
+    python finetune_decoder.py
+
+    # After fine-tuning, use with inference script
+    # Set BASE_MODEL = False in infer_decoder_only.py
+    # Update MODEL_PATH to finetuned model
+
+Configuration Options:
+- BASE_MODEL_PATH: Path to pre-trained base model checkpoint
+- SAVE_PREFIX: Prefix for saved fine-tuned model files
+- DATASET_PATH: Path to Q&A training data
+- EPOCHS: Number of fine-tuning epochs
+- BATCH_SIZE: Training batch size
+- SEQ_LEN: Maximum sequence length
+- LEARNING_RATE: Optimizer learning rate
+
+Output:
+- Timestamped model checkpoint (e.g., finetune_nano_10_512_4_4_512_2025_09_09-09_37_09.pth)
+- Latest model checkpoint (e.g., finetune_nano_10_512_4_4_512_latest.pth)
+- Training progress with loss/perplexity metrics
+- Validation performance tracking
+
+Dependencies:
+    - torch: Deep learning framework
+    - src.decoder_only: Base model implementation and training utilities
 """
 
 import os

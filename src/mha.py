@@ -1,3 +1,48 @@
+"""
+Custom Multi-Head Attention Implementation
+
+This module provides a custom implementation of multi-head attention (MHA) mechanism,
+designed as a drop-in replacement for PyTorch's nn.MultiheadAttention. The implementation
+follows the transformer architecture principles from "Attention is All You Need" paper.
+
+Key Features:
+- Efficient implementation with combined Q/K/V projections
+- Support for both self-attention and cross-attention
+- Proper handling of attention masks (causal and padding masks)
+- Dropout regularization on attention weights
+- Scaled dot-product attention with temperature scaling
+- Compatible with transformer decoder architectures
+
+Architecture:
+- Input tensors: (Sequence_Length, Batch_Size, Embedding_Dim)
+- Multi-head processing: Splits embedding dimension across multiple heads
+- Attention computation: Query-Key-Value dot-product with scaling
+- Output projection: Concatenates heads and projects back to embedding dimension
+
+Usage:
+    # Self-attention (query = key = value)
+    mha = MHA(embed_dim=512, num_heads=8, dropout=0.1)
+    output, weights = mha(query, query, query)
+
+    # Cross-attention (different query, key, value)
+    output, weights = mha(query, key, value)
+
+    # With causal mask for autoregressive generation
+    causal_mask = torch.triu(torch.ones(L, L), diagonal=1).bool()
+    causal_mask = causal_mask.masked_fill(causal_mask, float('-inf'))
+    output, _ = mha(query, key, value, attn_mask=causal_mask)
+
+Performance Optimizations:
+- Single linear projection for Q, K, V (more efficient than separate layers)
+- Proper tensor reshaping to leverage PyTorch's optimized matrix operations
+- Support for key padding masks to handle variable-length sequences
+- Memory-efficient attention weight computation
+
+Dependencies:
+    - torch: Deep learning framework
+    - math: Mathematical functions for scaling factor
+"""
+
 # pylint: disable=E0633,E1102
 import math
 import torch
